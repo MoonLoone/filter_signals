@@ -2,7 +2,7 @@ import components.Filter;
 
 public class Main {
     public static void main(String[] args) {
-        Filter filterWithStep = filterWithStep(0.99997f);
+        Filter filterWithStep = filterWithStep(0.99f);
         Filter filterWithImp = filterWithImpulse(0.7f);
         System.out.println("Step reaction");
         System.out.println(filterWithStep);
@@ -11,7 +11,7 @@ public class Main {
     }
 
     private static Filter filterWithStep(float amplitude){
-        Filter filter = new Filter(15, 30);
+        Filter filter = new Filter(15, 20);
         filter.simulateStep(amplitude);
         filter.quantizeSamples();
         filter.quantizeCoefficients();
@@ -21,7 +21,7 @@ public class Main {
     }
 
     private static Filter filterWithImpulse(float amplitude){
-        Filter filter = new Filter(15, 30);
+        Filter filter = new Filter(15, 20);
         filter.simulateImp(amplitude);
         filter.quantizeSamples();
         filter.quantizeCoefficients();

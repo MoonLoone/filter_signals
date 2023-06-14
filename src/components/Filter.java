@@ -1,7 +1,5 @@
 package components;
 
-import java.util.Arrays;
-
 public class Filter {
 
     private static final int SHORT_SHIFT = 32768;
@@ -20,14 +18,17 @@ public class Filter {
         this.quantized_coefficients = new int[filterOrder + 1];
         this.samples = new float[timeToSimulate];
         this.quantized_samples = new short[timeToSimulate];
-        this.filteringResultsConverted = new float[coefficients.length+samples.length];
-        this.filtering_results = new short[filteringResultsConverted.length];}
+        this.filteringResultsConverted = new float[timeToSimulate];
+        this.filtering_results = new short[timeToSimulate];}
 
     public void  convolve() {
+        int accumulator;
         for (int i=0; i<quantized_samples.length; i++){
+            accumulator = 0;
             for (int j = 0; j<quantized_coefficients.length; j++){
-                filtering_results[i+j] += quantized_samples[i] * quantized_coefficients[j];
+                if (i - j >= 0) accumulator += quantized_samples[i-j] * quantized_coefficients[j];
             }
+            filtering_results[i] = (short) (accumulator >> 15);
         }
     }
 
@@ -43,7 +44,7 @@ public class Filter {
 
     public void convertResults() {
         for (int i = 0; i < filtering_results.length; i++)
-            filteringResultsConverted[i] =  filtering_results[i] / 32768.0f;
+            filteringResultsConverted[i] =  filtering_results[i] / (float) SHORT_SHIFT;
     }
 
     public void simulateImp(float strength) {
