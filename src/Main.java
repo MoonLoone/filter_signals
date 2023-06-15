@@ -2,7 +2,7 @@ import components.Filter;
 
 public class Main {
     public static void main(String[] args) {
-        Filter filterWithStep = filterWithStep(0.99f);
+        Filter filterWithStep = filterWithStep(0.7f);
         Filter filterWithImp = filterWithImpulse(0.7f);
         System.out.println("Step reaction");
         System.out.println(filterWithStep);

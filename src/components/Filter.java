@@ -44,7 +44,7 @@ public class Filter {
 
     public void convertResults() {
         for (int i = 0; i < filtering_results.length; i++)
-            filteringResultsConverted[i] =  filtering_results[i] / (float) SHORT_SHIFT;
+            filteringResultsConverted[i] = filtering_results[i] / (float) SHORT_SHIFT;
     }
 
     public void simulateImp(float strength) {
